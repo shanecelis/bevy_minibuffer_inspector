@@ -11,7 +11,7 @@ use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::{prelude::in_state, state::FreelyMutableState};
 
-/// ## Adds the 'state_inspector' act
+/// ## Adds the 'inspect_state' act
 ///
 /// This act toggles the visibility of registered state inspectors.
 ///
@@ -33,26 +33,26 @@ use bevy_state::{prelude::in_state, state::FreelyMutableState};
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::StateInspectorActs::default()
+///             minibuffer::StateActs::default()
 ///                 .add::<AppState>()
 ///         ));
 /// }
 /// ```
-pub struct StateInspectorActs {
+pub struct StateActs {
     plugins: InspectorPlugins<Self>,
     acts: Acts,
 }
 
-impl PluginGroup for StateInspectorActs {
+impl PluginGroup for StateActs {
     fn build(self) -> PluginGroupBuilder {
         self.warn_on_unused_acts();
         self.plugins
-            .warn_on_empty("No states registered with `StateInspectorActs`; consider adding some.");
+            .warn_on_empty("No states registered with `StateActs`; consider adding some.");
         self.plugins.build()
     }
 }
 
-impl ActsPluginGroup for StateInspectorActs {
+impl ActsPluginGroup for StateActs {
     fn acts(&self) -> &Acts {
         &self.acts
     }
@@ -62,7 +62,7 @@ impl ActsPluginGroup for StateInspectorActs {
     }
 }
 
-impl StateInspectorActs {
+impl StateActs {
     /// Add a state to the list of inspectors when prompted.
     pub fn add<S: FreelyMutableState + Reflect>(mut self) -> Self {
         self.plugins
@@ -82,13 +82,13 @@ impl StateInspectorActs {
     }
 }
 
-fn state_inspector(states: Res<Inspectors<StateInspectorActs>>, mut minibuffer: Minibuffer) {
+fn inspect_state(states: Res<Inspectors<StateActs>>, mut minibuffer: Minibuffer) {
     if !states.visible.is_empty() {
         minibuffer
             .prompt_map("state: ", states.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut states: ResMut<Inspectors<StateInspectorActs>>| {
+                 mut states: ResMut<Inspectors<StateActs>>| {
                     if let Ok(index) = trigger.event_mut().take_result().unwrap() {
                         states.visible[index] = !states.visible[index];
                     }
@@ -99,13 +99,13 @@ fn state_inspector(states: Res<Inspectors<StateInspectorActs>>, mut minibuffer: 
     }
 }
 
-impl Default for StateInspectorActs {
+impl Default for StateActs {
     fn default() -> Self {
         Self {
             plugins: InspectorPlugins::default(),
-            acts: Acts::new([Act::new(state_inspector)]),
-            // acts: Acts::new([Act::new(InspectorPlugins::<StateInspectorActs>::inspector("state: ", "No states registered"))
-            // .named("state_inspector")])
+            acts: Acts::new([Act::new(inspect_state)]),
+            // acts: Acts::new([Act::new(InspectorPlugins::<StateActs>::inspector("state: ", "No states registered"))
+            // .named("inspect_state")])
         }
     }
 }

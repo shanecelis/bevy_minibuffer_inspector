@@ -11,7 +11,7 @@ use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::prelude::in_state;
 
-/// ## Adds the 'resource_inspector' act
+/// ## Adds the 'inspect_resource' act
 ///
 /// This act toggles the visibility of resource inspectors that were added.
 ///
@@ -30,18 +30,18 @@ use bevy_state::prelude::in_state;
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::ResourceInspectorActs::default()
+///             minibuffer::ResourceActs::default()
 ///                 .add::<R1>()
 ///                 .add::<R2>()
 ///         ));
 /// }
 /// ```
-pub struct ResourceInspectorActs {
+pub struct ResourceActs {
     plugins: InspectorPlugins<Self>,
     acts: Acts,
 }
 
-impl ActsPluginGroup for ResourceInspectorActs {
+impl ActsPluginGroup for ResourceActs {
     fn acts(&self) -> &Acts {
         &self.acts
     }
@@ -51,7 +51,7 @@ impl ActsPluginGroup for ResourceInspectorActs {
     }
 }
 
-impl ResourceInspectorActs {
+impl ResourceActs {
     /// Add a resource to the list of resources when prompted.
     pub fn add<R: Resource + Reflect>(mut self) -> Self {
         self.plugins.add_inspector(
@@ -73,17 +73,17 @@ impl ResourceInspectorActs {
     }
 }
 
-impl Default for ResourceInspectorActs {
+impl Default for ResourceActs {
     fn default() -> Self {
         Self {
             plugins: InspectorPlugins::default(),
-            acts: Acts::new([Act::new(resource_inspector)]),
+            acts: Acts::new([Act::new(inspect_resource)]),
         }
     }
 }
 
-fn resource_inspector(
-    resources: Res<Inspectors<ResourceInspectorActs>>,
+fn inspect_resource(
+    resources: Res<Inspectors<ResourceActs>>,
     mut minibuffer: Minibuffer,
 ) {
     if !resources.visible.is_empty() {
@@ -91,7 +91,7 @@ fn resource_inspector(
             .prompt_map("resource: ", resources.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut resources: ResMut<Inspectors<ResourceInspectorActs>>| {
+                 mut resources: ResMut<Inspectors<ResourceActs>>| {
                     if let Ok(index) = trigger.event_mut().take_result().unwrap() {
                         resources.visible[index] = !resources.visible[index];
                     }
@@ -102,11 +102,11 @@ fn resource_inspector(
     }
 }
 
-impl PluginGroup for ResourceInspectorActs {
+impl PluginGroup for ResourceActs {
     fn build(self) -> PluginGroupBuilder {
         self.warn_on_unused_acts();
         self.plugins.warn_on_empty(
-            "No resources registered with `ResourceInspectorActs`; consider adding some.",
+            "No resources registered with `ResourceActs`; consider adding some.",
         );
         self.plugins.build()
     }

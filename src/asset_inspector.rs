@@ -27,17 +27,17 @@ use bevy_state::prelude::in_state;
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::AssetInspectorActs::default()
+///             minibuffer::AssetActs::default()
 ///                 .add::<StandardMaterial>()
 ///         ));
 /// }
 /// ```
-pub struct AssetInspectorActs {
+pub struct AssetActs {
     plugins: InspectorPlugins<Self>,
     acts: Acts,
 }
 
-impl ActsPluginGroup for AssetInspectorActs {
+impl ActsPluginGroup for AssetActs {
     fn acts(&self) -> &Acts {
         &self.acts
     }
@@ -47,7 +47,7 @@ impl ActsPluginGroup for AssetInspectorActs {
     }
 }
 
-impl AssetInspectorActs {
+impl AssetActs {
     /// Add an asset to be shown when prompted.
     pub fn add<A: Asset + Reflect>(mut self) -> Self {
         self.plugins
@@ -67,7 +67,7 @@ impl AssetInspectorActs {
     }
 }
 
-impl Default for AssetInspectorActs {
+impl Default for AssetActs {
     fn default() -> Self {
         Self {
             plugins: InspectorPlugins::default(),
@@ -76,13 +76,13 @@ impl Default for AssetInspectorActs {
     }
 }
 
-fn asset_inspector(assets: Res<Inspectors<AssetInspectorActs>>, mut minibuffer: Minibuffer) {
+fn asset_inspector(assets: Res<Inspectors<AssetActs>>, mut minibuffer: Minibuffer) {
     if !assets.visible.is_empty() {
         minibuffer
             .prompt_map("asset: ", assets.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut assets: ResMut<Inspectors<AssetInspectorActs>>| {
+                 mut assets: ResMut<Inspectors<AssetActs>>| {
                     if let Ok(index) = trigger.event_mut().take_result().unwrap() {
                         assets.visible[index] = !assets.visible[index];
                     }
@@ -93,11 +93,11 @@ fn asset_inspector(assets: Res<Inspectors<AssetInspectorActs>>, mut minibuffer: 
     }
 }
 
-impl PluginGroup for AssetInspectorActs {
+impl PluginGroup for AssetActs {
     fn build(self) -> PluginGroupBuilder {
         self.warn_on_unused_acts();
         self.plugins
-            .warn_on_empty("No assets registered with `AssetInspectorActs`; consider adding some.");
+            .warn_on_empty("No assets registered with `AssetActs`; consider adding some.");
         self.plugins.build()
     }
 }

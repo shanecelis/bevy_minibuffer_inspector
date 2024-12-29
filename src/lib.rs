@@ -22,7 +22,7 @@
 //! ```no_run
 //! use bevy_minibuffer::prelude::*;
 //! use bevy_inspector_egui::minibuffer;
-//! let mut inspector_acts = minibuffer::WorldInspectorActs::default();
+//! let mut inspector_acts = minibuffer::WorldActs::default();
 //! inspector_acts.acts_mut().configure("world_inspector", |mut act| {
 //!    act.bind(keyseq! { I W });
 //! });
@@ -47,7 +47,7 @@
 //!
 //! ## Configuration
 //!
-//! The `WorldInspectorActs` provides 'world_inspector' act and it is the only
+//! The `WorldActs` provides 'world_inspector' act and it is the only
 //! one that does not require any type registration.
 //!
 //! ```no_run
@@ -59,7 +59,7 @@
 //!         .add_plugins(MinibufferPlugins)
 //!         .add_acts((
 //!             BasicActs::default(),
-//!             minibuffer::WorldInspectorActs::default(),
+//!             minibuffer::WorldActs::default(),
 //!         ));
 //! }
 //! ```
@@ -67,7 +67,7 @@
 //! ### Type Registration
 //!
 //! Each of the other acts do expect type registrations. For instance, the
-//! `AssetInspectorActs` provides 'asset_inspector' but expects registration of
+//! `AssetActs` provides 'asset_inspector' but expects registration of
 //! what assets it should prompt for when the act is invoked. A warning will be
 //! emitted if no types have been registered.
 //!
@@ -80,7 +80,7 @@
 //!         .add_plugins(MinibufferPlugins)
 //!         .add_acts((
 //!             BasicActs::default(),
-//!             minibuffer::AssetInspectorActs::default()
+//!             minibuffer::AssetActs::default()
 //!                 .add::<StandardMaterial>()
 //!         ));
 //! }

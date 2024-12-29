@@ -978,7 +978,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_minibuffer_inspectors"
+name = "bevy_minibuffer_inspector"
 version = "0.1.0"
 dependencies = [
  "bevy",

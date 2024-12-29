@@ -20,7 +20,7 @@ enum WorldInspectorState {
     Visible,
 }
 
-/// ## Adds the 'world_inspector' act
+/// ## Adds the 'inspect_world' act
 ///
 /// This act toggles the visibility of the world inspector.
 ///
@@ -35,15 +35,15 @@ enum WorldInspectorState {
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::WorldInspectorActs::default(),
+///             minibuffer::WorldActs::default(),
 ///         ));
 /// }
 /// ```
-pub struct WorldInspectorActs {
+pub struct WorldActs {
     acts: Acts,
 }
 
-impl ActsPlugin for WorldInspectorActs {
+impl ActsPlugin for WorldActs {
     fn acts(&self) -> &Acts {
         &self.acts
     }
@@ -52,7 +52,7 @@ impl ActsPlugin for WorldInspectorActs {
     }
 }
 
-fn world_inspector(
+fn inspect_world(
     state: Res<State<WorldInspectorState>>,
     mut next_state: ResMut<NextState<WorldInspectorState>>,
     mut minibuffer: Minibuffer,
@@ -66,15 +66,15 @@ fn world_inspector(
     minibuffer.message(msg);
 }
 
-impl Default for WorldInspectorActs {
+impl Default for WorldActs {
     fn default() -> Self {
         Self {
-            acts: Acts::new([Act::new(world_inspector)]),
+            acts: Acts::new([Act::new(inspect_world)]),
         }
     }
 }
 
-impl Plugin for WorldInspectorActs {
+impl Plugin for WorldActs {
     fn build(&self, app: &mut App) {
         app.add_plugins(
             WorldInspectorPlugin::default()

@@ -12,7 +12,7 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::prelude::*;
 use bevy_minibuffer::prelude::*;
-use bevy_minibuffer_inspectors as minibuffer;
+use bevy_minibuffer_inspector as inspector;
 
 #[derive(States, Default, Debug, Clone, Eq, PartialEq, Hash, Reflect)]
 enum AppState {
@@ -49,13 +49,13 @@ fn main() {
         .register_type::<Settings>()
         .add_acts((
             BasicActs::default(),
-            minibuffer::WorldInspectorActs::default(),
-            minibuffer::ResourceInspectorActs::default()
+            inspector::WorldActs::default(),
+            inspector::ResourceActs::default()
                 .add::<Configuration>()
                 .add::<Settings>(),
-            minibuffer::StateInspectorActs::default().add::<AppState>(),
-            minibuffer::AssetInspectorActs::default().add::<StandardMaterial>(),
-            minibuffer::FilterQueryInspectorActs::default()
+            inspector::StateActs::default().add::<AppState>(),
+            inspector::AssetActs::default().add::<StandardMaterial>(),
+            inspector::FilterQueryActs::default()
                 .add::<With<Transform>>()
                 .add::<With<Mesh3d>>(),
         ))
@@ -109,7 +109,7 @@ fn setup(
         Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
 
-    minibuffer.message("Type ':world Tab Return' to see the world inspector. Then type ': Tab' to see the other inspectors.");
+    minibuffer.message("Type ':inspect_w Tab Return' to see the world inspector. Then type ': Tab' to see the other inspectors.");
     minibuffer.set_visible(true);
 }
 

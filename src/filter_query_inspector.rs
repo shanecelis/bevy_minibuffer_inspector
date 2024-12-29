@@ -9,7 +9,7 @@ use bevy_ecs::{
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_state::prelude::in_state;
 
-/// ## Adds the 'filter_query_inspector' act
+/// ## Adds the 'inspect_filter_query' act
 ///
 /// This act toggles the visibility of the added filter query inspectors.
 ///
@@ -24,18 +24,18 @@ use bevy_state::prelude::in_state;
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::FilterQueryInspectorActs::default()
+///             minibuffer::FilterQueryActs::default()
 ///                 .add::<With<Transform>>()
 ///                 .add::<With<Mesh3d>>()
 ///         ));
 /// }
 /// ```
-pub struct FilterQueryInspectorActs {
+pub struct FilterQueryActs {
     plugins: InspectorPlugins<Self>,
     acts: Acts,
 }
 
-impl ActsPluginGroup for FilterQueryInspectorActs {
+impl ActsPluginGroup for FilterQueryActs {
     fn acts(&self) -> &Acts {
         &self.acts
     }
@@ -45,7 +45,7 @@ impl ActsPluginGroup for FilterQueryInspectorActs {
     }
 }
 
-impl FilterQueryInspectorActs {
+impl FilterQueryActs {
     pub fn add<A: QueryFilter + 'static>(mut self) -> Self {
         self.plugins.add_inspector(
             pretty_type_name::<A>(),
@@ -66,17 +66,17 @@ impl FilterQueryInspectorActs {
     }
 }
 
-impl Default for FilterQueryInspectorActs {
+impl Default for FilterQueryActs {
     fn default() -> Self {
         Self {
             plugins: InspectorPlugins::default(),
-            acts: Acts::new([Act::new(filter_query_inspector)]),
+            acts: Acts::new([Act::new(inspect_filter_query)]),
         }
     }
 }
 
-fn filter_query_inspector(
-    assets: Res<Inspectors<FilterQueryInspectorActs>>,
+fn inspect_filter_query(
+    assets: Res<Inspectors<FilterQueryActs>>,
     mut minibuffer: Minibuffer,
 ) {
     if !assets.visible.is_empty() {
@@ -84,7 +84,7 @@ fn filter_query_inspector(
             .prompt_map("filter query: ", assets.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut assets: ResMut<Inspectors<FilterQueryInspectorActs>>| {
+                 mut assets: ResMut<Inspectors<FilterQueryActs>>| {
                     if let Ok(index) = trigger.event_mut().take_result().unwrap() {
                         assets.visible[index] = !assets.visible[index];
                     }
@@ -95,11 +95,11 @@ fn filter_query_inspector(
     }
 }
 
-impl PluginGroup for FilterQueryInspectorActs {
+impl PluginGroup for FilterQueryActs {
     fn build(self) -> PluginGroupBuilder {
         self.warn_on_unused_acts();
         self.plugins.warn_on_empty(
-            "No filter queries registered with `FilterQueryInspectorActs`; consider adding some.",
+            "No filter queries registered with `FilterQueryActs`; consider adding some.",
         );
         self.plugins.build()
     }
