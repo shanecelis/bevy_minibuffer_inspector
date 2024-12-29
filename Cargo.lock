@@ -965,8 +965,6 @@ dependencies = [
 [[package]]
 name = "bevy_minibuffer"
 version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a6c4450e9d74609233faf4237c2beaac0693ff9c734ad8b9b26847e9ff0433cd"
 dependencies = [
  "accesskit",
  "bevy",
@@ -985,7 +983,15 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy-inspector-egui",
+ "bevy_app",
+ "bevy_asset",
+ "bevy_ecs",
+ "bevy_log",
  "bevy_minibuffer",
+ "bevy_reflect",
+ "bevy_state",
+ "disqualified",
+ "trie-rs",
 ]
 
 [[package]]

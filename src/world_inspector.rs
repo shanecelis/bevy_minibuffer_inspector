@@ -1,4 +1,4 @@
-use crate::quick::WorldInspectorPlugin;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_app::{App, Plugin};
 use bevy_ecs::{
     prelude::{Res, ResMut},

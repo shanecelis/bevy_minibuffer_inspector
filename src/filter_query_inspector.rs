@@ -1,8 +1,5 @@
-use crate::{
-    minibuffer::{InspectorPlugins, Inspectors},
-    quick::FilterQueryInspectorPlugin,
-    utils::pretty_type_name,
-};
+use crate::{InspectorPlugins, Inspectors, utils::pretty_type_name};
+use bevy_inspector_egui::quick::FilterQueryInspectorPlugin;
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
     prelude::{Res, ResMut, Trigger},

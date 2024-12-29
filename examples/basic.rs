@@ -10,9 +10,9 @@
 //! - state_inspector
 //! - filter_query_inspector
 use bevy::prelude::*;
-use bevy_inspector_egui::minibuffer;
 use bevy_inspector_egui::prelude::*;
 use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspectors as minibuffer;
 
 #[derive(States, Default, Debug, Clone, Eq, PartialEq, Hash, Reflect)]
 enum AppState {

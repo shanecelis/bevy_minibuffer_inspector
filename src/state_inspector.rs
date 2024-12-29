@@ -1,7 +1,6 @@
-use crate::{
-    minibuffer::{InspectorPlugins, Inspectors},
+use crate::{InspectorPlugins, Inspectors, utils::pretty_type_name};
+use bevy_inspector_egui::{
     quick::StateInspectorPlugin,
-    utils::pretty_type_name,
 };
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
