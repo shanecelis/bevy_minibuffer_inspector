@@ -991,7 +991,9 @@ dependencies = [
  "bevy_reflect",
  "bevy_state",
  "disqualified",
+ "keyseq",
  "trie-rs",
+ "version-sync",
 ]
 
 [[package]]

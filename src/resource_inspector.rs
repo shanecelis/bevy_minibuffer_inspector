@@ -20,7 +20,7 @@ use bevy_state::prelude::in_state;
 /// ```no_run
 /// use bevy::prelude::*;
 /// use bevy_minibuffer::prelude::*;
-/// use bevy_inspector_egui::minibuffer;
+/// use bevy_minibuffer_inspector as inspector;
 /// #[derive(Resource, Reflect)]
 /// struct R1;
 /// #[derive(Resource, Reflect)]
@@ -30,7 +30,7 @@ use bevy_state::prelude::in_state;
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::ResourceActs::default()
+///             inspector::ResourceActs::default()
 ///                 .add::<R1>()
 ///                 .add::<R2>()
 ///         ));

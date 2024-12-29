@@ -20,7 +20,7 @@ use bevy_state::{prelude::in_state, state::FreelyMutableState};
 /// ```no_run
 /// use bevy::prelude::*;
 /// use bevy_minibuffer::prelude::*;
-/// use bevy_inspector_egui::minibuffer;
+/// use bevy_minibuffer_inspector as inspector;
 /// #[derive(States, Default, Debug, Clone, Eq, PartialEq, Hash, Reflect)]
 /// enum AppState {
 ///     #[default]
@@ -33,7 +33,7 @@ use bevy_state::{prelude::in_state, state::FreelyMutableState};
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::StateActs::default()
+///             inspector::StateActs::default()
 ///                 .add::<AppState>()
 ///         ));
 /// }

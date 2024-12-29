@@ -29,13 +29,13 @@ enum WorldInspectorState {
 /// ```no_run
 /// use bevy::prelude::*;
 /// use bevy_minibuffer::prelude::*;
-/// use bevy_inspector_egui::minibuffer;
+/// use bevy_minibuffer_inspector as inspector;
 /// fn plugin(app: &mut App) {
 ///     app
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::WorldActs::default(),
+///             inspector::WorldActs::default(),
 ///         ));
 /// }
 /// ```

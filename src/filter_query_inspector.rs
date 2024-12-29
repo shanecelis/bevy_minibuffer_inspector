@@ -18,13 +18,13 @@ use bevy_state::prelude::in_state;
 /// ```no_run
 /// use bevy::prelude::*;
 /// use bevy_minibuffer::prelude::*;
-/// use bevy_inspector_egui::minibuffer;
+/// use bevy_minibuffer_inspector as inspector;
 /// fn plugin(app: &mut App) {
 ///     app
 ///         .add_plugins(MinibufferPlugins)
 ///         .add_acts((
 ///             BasicActs::default(),
-///             minibuffer::FilterQueryActs::default()
+///             inspector::FilterQueryActs::default()
 ///                 .add::<With<Transform>>()
 ///                 .add::<With<Mesh3d>>()
 ///         ));
@@ -46,6 +46,7 @@ impl ActsPluginGroup for FilterQueryActs {
 }
 
 impl FilterQueryActs {
+    /// Add a query filter.
     pub fn add<A: QueryFilter + 'static>(mut self) -> Self {
         self.plugins.add_inspector(
             pretty_type_name::<A>(),
