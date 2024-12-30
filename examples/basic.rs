@@ -44,8 +44,9 @@ fn plugin(app: &mut App) {
             BasicActs::default(),
             inspector::WorldActs::default(),
             inspector::ResourceActs::default()
-                .add::<Configuration>()
-                .add::<Settings>(),
+                // .add::<Configuration>()
+                // .add::<Settings>()
+                ,
             inspector::StateActs::default().add::<AppState>(),
             inspector::AssetActs::default().add::<StandardMaterial>(),
             inspector::FilterQueryActs::default()

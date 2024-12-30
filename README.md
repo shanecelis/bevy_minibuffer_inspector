@@ -37,30 +37,26 @@ fn plugin(app: &mut App) {
 }
 ```
 
-There is no configuration required unless you want to add a key binding.
+There is no configuration required for `WorldActs` unless you want to add a key
+binding.
 
 ```rust no_run
 use bevy::prelude::*;
 use bevy_minibuffer::prelude::*;
 use bevy_minibuffer_inspector as inspector;
-fn plugin(app: &mut App) {
-    app
-        .add_plugins(MinibufferPlugins)
-        .add_acts((
-            BasicActs::default(),
-            inspector::WorldActs::default()
-                .configure("inspect_world", |mut act| {
-                    act.bind(keyseq! { I W });
-                }),
-        ));
-}
+inspector::WorldActs::default()
+    .configure("inspect_world", |mut act| {
+        act.bind(keyseq! { I W });
+    })
 ```
 
 ### inspect_resource
 <img align="right" src="https://github.com/user-attachments/assets/4ea741f3-6224-4421-a844-6dc3a21e406e"/>
 
-`ResourceActs` provides the 'inspect_resource' act. Register the
-resources that it prompts for.
+`ResourceActs` provides the 'inspect_resource' act. Register the resources that
+it prompts for. If no resources are registered, a warning will be emitted in the
+logs and the 'inspect_resource' act will report that there are no resources
+available when run.
 
 ```rust no_run
 use bevy::prelude::*;
@@ -83,7 +79,10 @@ fn plugin(app: &mut App) {
 <img align="right" src="https://github.com/user-attachments/assets/b85ccf90-c9de-4298-b645-3fdd88ff3636"/>
 
 `AssetActs` provides the 'inspect_asset' act. Register the assets that it
-prompts for.
+prompts for. If no assets are registered, a warning will be emitted in the
+logs and the 'inspect_asset' act will report that there are no assets
+available when run.
+
 
 ```rust no_run
 use bevy::prelude::*;
@@ -94,7 +93,8 @@ fn plugin(app: &mut App) {
         .add_plugins(MinibufferPlugins)
         .add_acts((
             BasicActs::default(),
-            inspector::AssetActs::default().add::<StandardMaterial>(),
+            inspector::AssetActs::default()
+                .add::<StandardMaterial>(),
         ));
 }
 ```
@@ -103,7 +103,9 @@ fn plugin(app: &mut App) {
 <img align="right" src="https://github.com/user-attachments/assets/7324be62-87b9-4f36-94c7-db62c979195d"/>
 
 `StateActs` provides the 'inspect_state' act. Register the states that it
-prompts for.
+prompts for. If no states are registered, a warning will be emitted in the
+logs and the 'inspect_state' act will report that there are no states
+available when run.
 
 
 ```rust no_run
@@ -117,7 +119,8 @@ fn plugin(app: &mut App) {
         .add_plugins(MinibufferPlugins)
         .add_acts((
             BasicActs::default(),
-            inspector::StateActs::default().add::<AppState>(),
+            inspector::StateActs::default()
+                .add::<AppState>(),
         ));
 }
 ```
@@ -126,7 +129,12 @@ fn plugin(app: &mut App) {
 <img align="right" src="https://github.com/user-attachments/assets/723b60a9-a9f0-4983-a4cf-31acf0f88dc8"/>
 
 `FilterQueryActs` provides the 'inspect_filter_query' act. Register the filters
-that it prompts for.
+that it prompts for. If no filter queries are registered, a warning will be
+emitted in the logs and the 'inspect_filter querie' act will report that there
+are no filter queries available when run.
+
+This is probably one of the most useful ways to get at exactly what one's
+interested in.
 
 ```rust no_run
 use bevy::prelude::*;
@@ -164,19 +172,8 @@ I wonder if maybe some bindings like this would work:
 - inspect_state, `I S`
 - inspect_filter_query, `I F`
 
-## Interaction
-
-Here is what an interaction for 'inspect_world' might look like:
-
-User types ':' or 'Alt-X', a black bar and prompt appear at the bottom of
-the screen---that's the minibuffer. The user types 'inspect_w Tab Return' to tab
-complete the 'inspect_world' act. The world inspector appears. If the user
-hits the 'BackTick' (`) key, the minibuffer will disappear and so will the
-inspector. Hit the 'BackTick' key again and both reappear.
-
-
-
 ## TODO
+
 - [ ] Make aliases available for registered kinds.
 
 ## Notes
