@@ -30,7 +30,7 @@ disqualified = "1.0.0"
 keyseq = { version = "0.5.0", features = ["bevy"] }
 
 [patch.crates-io]
-bevy_minibuffer = { path = "../bevy_minibuffer" }
+bevy_minibuffer = { git = "https://github.com/shanecelis/bevy_minibuffer.git" }
 
 [dev-dependencies]
 bevy = "0.15.0"

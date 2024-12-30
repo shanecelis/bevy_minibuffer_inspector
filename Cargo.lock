@@ -965,6 +965,7 @@ dependencies = [
 [[package]]
 name = "bevy_minibuffer"
 version = "0.2.0"
+source = "git+https://github.com/shanecelis/bevy_minibuffer.git#1c799e33bf1d90a2198b6a45ab5a5d8d1594a530"
 dependencies = [
  "accesskit",
  "bevy",
