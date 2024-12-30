@@ -21,7 +21,7 @@ They may be used _a la carte_.
 ### inspect_world
 <img align="right" src="https://github.com/user-attachments/assets/d6a8f259-5469-4e32-93d9-aefbf54a0e5a"/>
 
-`WorldActs` provides 'inspect_world' act.
+`WorldActs` provides 'inspect_world' act. 
 
 ```rust no_run
 use bevy::prelude::*;
@@ -37,11 +37,30 @@ fn plugin(app: &mut App) {
 }
 ```
 
+There is no configuration required unless you want to add a key binding.
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::WorldActs::default()
+                .configure("inspect_world", |mut act| {
+                    act.bind(keyseq! { I W });
+                }),
+        ));
+}
+```
+
 ### inspect_resource
 <img align="right" src="https://github.com/user-attachments/assets/4ea741f3-6224-4421-a844-6dc3a21e406e"/>
 
-`ResourceActs` provides the 'inspect_resource' act. One must register the
-resources that are shown at its prompt.
+`ResourceActs` provides the 'inspect_resource' act. Register the
+resources that it prompts for.
 
 ```rust no_run
 use bevy::prelude::*;
