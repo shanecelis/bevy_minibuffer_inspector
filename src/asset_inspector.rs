@@ -10,7 +10,7 @@ use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::prelude::in_state;
 
-/// ## Adds the 'asset_inspector' act
+/// ## Adds the 'inspect_asset' act
 ///
 /// This act toggles the visibility of added asset inspectors.
 ///
@@ -69,12 +69,12 @@ impl Default for AssetActs {
     fn default() -> Self {
         Self {
             plugins: InspectorPlugins::default(),
-            acts: Acts::new([Act::new(asset_inspector)]),
+            acts: Acts::new([Act::new(inspect_asset)]),
         }
     }
 }
 
-fn asset_inspector(assets: Res<Inspectors<AssetActs>>, mut minibuffer: Minibuffer) {
+fn inspect_asset(assets: Res<Inspectors<AssetActs>>, mut minibuffer: Minibuffer) {
     if !assets.visible.is_empty() {
         minibuffer
             .prompt_map("asset: ", assets.names.clone())
