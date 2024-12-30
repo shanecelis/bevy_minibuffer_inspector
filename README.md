@@ -9,7 +9,7 @@ provide another means of invoking inspectors.
 
 ## Acts
 
-The Minibuffer acts, i.e., commands this module makes available are:
+The Minibuffer acts, i.e., commands, this crate makes available are:
 - inspect_world
 - inspect_resource
 - inspect_asset
@@ -18,11 +18,118 @@ The Minibuffer acts, i.e., commands this module makes available are:
 
 They may be used _a la carte_.
 
+### inspect_world
+<img align="right" src=""/>
+
+`WorldActs` provides 'inspect_world' act.
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::WorldActs::default(),
+        ));
+}
+```
+
+### inspect_resource
+<img align="right" src=""/>
+
+`ResourceActs` provides the 'inspect_resource' act. One must register the
+resources that are shown at its prompt.
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+#[derive(Resource, Reflect)]
+struct Configuration { verbose: bool };
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::ResourceActs::default()
+                .add::<Configuration>(),
+        ));
+}
+```
+
+### inspect_asset
+<img align="right" src=""/>
+
+`AssetActs` provides the 'inspect_asset' act. Register the assets that it
+prompts for.
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::AssetActs::default().add::<StandardMaterial>(),
+        ));
+}
+```
+
+### inspect_state
+<img align="right" src=""/>
+
+`StateActs` provides the 'inspect_state' act. Register the states that it
+prompts for.
+
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+#[derive(States, Debug, Clone, Eq, PartialEq, Hash, Reflect)]
+enum AppState { A, B, C }
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::StateActs::default().add::<AppState>(),
+        ));
+}
+```
+
+### inspect_filter_query
+<img align="right" src=""/>
+
+`FilterQueryActs` provides the 'inspect_filter_query' act. Register the filters
+that it prompts for.
+
+```rust no_run
+use bevy::prelude::*;
+use bevy_minibuffer::prelude::*;
+use bevy_minibuffer_inspector as inspector;
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::FilterQueryActs::default()
+                .add::<With<Transform>>()
+                .add::<With<Mesh3d>>(),
+        ));
+}
+```
+
 ## Key Bindings
 
-No key bindings have been defined. Users are welcome to add them.
+No key bindings are defined. Users are welcome to add them.
 
-```no_run
+```rust no_run
 use bevy_minibuffer::prelude::*;
 use bevy_minibuffer_inspector as inspector;
 let mut inspector_acts = inspector::WorldActs::default();
@@ -48,46 +155,12 @@ complete the 'inspect_world' act. The world inspector appears. If the user
 hits the 'BackTick' (`) key, the minibuffer will disappear and so will the
 inspector. Hit the 'BackTick' key again and both reappear.
 
-## Configuration
 
-The `WorldActs` provides 'inspect_world' act and it is the only one that does
-not require any type registration.
 
-```rust no_run
-use bevy::prelude::*;
-use bevy_minibuffer::prelude::*;
-use bevy_minibuffer_inspector as inspector;
-fn plugin(app: &mut App) {
-    app
-        .add_plugins(MinibufferPlugins)
-        .add_acts((
-            BasicActs::default(),
-            inspector::WorldActs::default(),
-        ));
-}
-```
+## TODO
+- [ ] Make aliases available for registered kinds.
 
-### Type Registration
-
-Each of the other acts do expect type registrations. For instance, the
-`AssetActs` provides 'inspect_asset' but expects registration of
-what assets it should prompt for when the act is invoked. A warning will be
-emitted if no types have been registered.
-
-```rust no_run
-use bevy::prelude::*;
-use bevy_minibuffer::prelude::*;
-use bevy_minibuffer_inspector as inspector;
-fn plugin(app: &mut App) {
-    app
-        .add_plugins(MinibufferPlugins)
-        .add_acts((
-            BasicActs::default(),
-            inspector::AssetActs::default()
-                .add::<StandardMaterial>()
-        ));
-}
-```
+## Notes
 
 DESIGN NOTE: There may be ways to automatically register various assets,
 resources, and other types but I would actually decline to do that as of now. It
@@ -96,20 +169,26 @@ user's hands.
 
 ## Visibility
 
-Each act toggles the visibility of an inspector. However, each inspector's
-visibility is tied to minibuffer's visibility. When minibuffer is invisible
+Each act toggles the visibility of its inspector. However, each inspector's
+visibility is tied to Minibuffer's visibility. When Minibuffer is invisible
 so are its inspectors and vice versa.
 
 NOTE: Any inspectors configured without the minibuffer module are
-independent of minibuffer's influence, so that's one escape hatch to this
-behavior.
+independent of minibuffer's influence.
 
-# Compatibility
+## Compatibility
 
 | bevy_minibuffer_inspector | bevy |
 |---------------------------|------|
 | 0.1.0                     | 0.15 |
 
-# License
+## License
 
 This crate is licensed under the MIT License or the Apache License 2.0.
+
+## Acknowledgments
+
+Many thanks to [Jakob Hellermann](https://github.com/jakobhellermann) for
+[bevy-inspector-egui](https://github.com/jakobhellermann/bevy-inspector-egui)
+which I am constantly reaching for to dig into my Bevy projects with. It is for
+that reason it is the first integration I made for bevy_minibuffer.

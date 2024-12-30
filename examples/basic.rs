@@ -38,15 +38,9 @@ struct Settings {
     option: f32,
 }
 
-fn main() {
-    App::new()
-        .add_plugins((DefaultPlugins, MinibufferPlugins))
-        .init_state::<AppState>()
-        .register_type::<AppState>()
-        .init_resource::<Configuration>()
-        .register_type::<Configuration>()
-        .init_resource::<Settings>()
-        .register_type::<Settings>()
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
         .add_acts((
             BasicActs::default(),
             inspector::WorldActs::default(),
@@ -59,6 +53,32 @@ fn main() {
                 .add::<With<Transform>>()
                 .add::<With<Mesh3d>>(),
         ))
+        .add_systems(Startup, |mut minibuffer: Minibuffer| {
+            // minibuffer.message("Type ': Tab' to see the other inspectors.");
+            // minibuffer.set_visible(true);
+        });
+}
+
+fn main() {
+    App::new()
+        .add_plugins((DefaultPlugins.set(
+
+        WindowPlugin {
+            primary_window: Some(Window {
+                    title: "basic".into(),
+                resolution: [400.0, 400.0].into(),
+                    ..Default::default()
+                }),
+                                 ..default()}
+
+            ),
+                      plugin))
+        .init_state::<AppState>()
+        .register_type::<AppState>()
+        .init_resource::<Configuration>()
+        .register_type::<Configuration>()
+        .init_resource::<Settings>()
+        .register_type::<Settings>()
         .add_systems(Startup, setup)
         .add_systems(
             OnEnter(AppState::A),
@@ -108,9 +128,6 @@ fn setup(
         Camera3d::default(),
         Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
-
-    minibuffer.message("Type ':inspect_w Tab Return' to see the world inspector. Then type ': Tab' to see the other inspectors.");
-    minibuffer.set_visible(true);
 }
 
 fn set_color(color: impl Into<Color>) -> impl Fn(Commands) {
