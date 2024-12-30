@@ -38,7 +38,7 @@ fn plugin(app: &mut App) {
 ```
 
 ### inspect_resource
-<img align="right" src=""/>
+<img align="right" src="https://github.com/user-attachments/assets/4ea741f3-6224-4421-a844-6dc3a21e406e"/>
 
 `ResourceActs` provides the 'inspect_resource' act. One must register the
 resources that are shown at its prompt.
@@ -61,7 +61,7 @@ fn plugin(app: &mut App) {
 ```
 
 ### inspect_asset
-<img align="right" src=""/>
+<img align="right" src="https://github.com/user-attachments/assets/b85ccf90-c9de-4298-b645-3fdd88ff3636"/>
 
 `AssetActs` provides the 'inspect_asset' act. Register the assets that it
 prompts for.
@@ -81,7 +81,7 @@ fn plugin(app: &mut App) {
 ```
 
 ### inspect_state
-<img align="right" src=""/>
+<img align="right" src="https://github.com/user-attachments/assets/7324be62-87b9-4f36-94c7-db62c979195d"/>
 
 `StateActs` provides the 'inspect_state' act. Register the states that it
 prompts for.
@@ -104,7 +104,7 @@ fn plugin(app: &mut App) {
 ```
 
 ### inspect_filter_query
-<img align="right" src=""/>
+<img align="right" src="https://github.com/user-attachments/assets/723b60a9-a9f0-4983-a4cf-31acf0f88dc8"/>
 
 `FilterQueryActs` provides the 'inspect_filter_query' act. Register the filters
 that it prompts for.
