@@ -1,12 +1,10 @@
-use crate::{InspectorPlugins, Inspectors, utils::pretty_type_name};
-use bevy_inspector_egui::{
-    quick::ResourceInspectorPlugin,
-};
+use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
     prelude::{Res, ResMut, Resource, Trigger},
     schedule::Condition,
 };
+use bevy_inspector_egui::quick::ResourceInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::prelude::in_state;
@@ -82,10 +80,7 @@ impl Default for ResourceActs {
     }
 }
 
-fn inspect_resource(
-    resources: Res<Inspectors<ResourceActs>>,
-    mut minibuffer: Minibuffer,
-) {
+fn inspect_resource(resources: Res<Inspectors<ResourceActs>>, mut minibuffer: Minibuffer) {
     if !resources.visible.is_empty() {
         minibuffer
             .prompt_map("resource: ", resources.names.clone())
@@ -105,9 +100,8 @@ fn inspect_resource(
 impl PluginGroup for ResourceActs {
     fn build(self) -> PluginGroupBuilder {
         self.warn_on_unused_acts();
-        self.plugins.warn_on_empty(
-            "No resources registered with `ResourceActs`; consider adding some.",
-        );
+        self.plugins
+            .warn_on_empty("No resources registered with `ResourceActs`; consider adding some.");
         self.plugins.build()
     }
 }

@@ -1,13 +1,11 @@
-use crate::{InspectorPlugins, Inspectors, utils::pretty_type_name};
-use bevy_inspector_egui::{
-    quick::AssetInspectorPlugin,
-};
+use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_asset::Asset;
 use bevy_ecs::{
     prelude::{Res, ResMut, Trigger},
     schedule::Condition,
 };
+use bevy_inspector_egui::quick::AssetInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::prelude::in_state;

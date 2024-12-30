@@ -39,8 +39,7 @@ struct Settings {
 }
 
 fn plugin(app: &mut App) {
-    app
-        .add_plugins(MinibufferPlugins)
+    app.add_plugins(MinibufferPlugins)
         .add_acts((
             BasicActs::default(),
             inspector::WorldActs::default(),
@@ -61,18 +60,17 @@ fn plugin(app: &mut App) {
 
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins.set(
-
-        WindowPlugin {
-            primary_window: Some(Window {
+        .add_plugins((
+            DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
                     title: "basic".into(),
-                resolution: [400.0, 400.0].into(),
+                    resolution: [400.0, 400.0].into(),
                     ..Default::default()
                 }),
-                                 ..default()}
-
-            ),
-                      plugin))
+                ..default()
+            }),
+            plugin,
+        ))
         .init_state::<AppState>()
         .register_type::<AppState>()
         .init_resource::<Configuration>()

@@ -1,9 +1,9 @@
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_app::{App, Plugin};
 use bevy_ecs::{
     prelude::{Res, ResMut},
     schedule::Condition,
 };
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_reflect::Reflect;
 use bevy_state::app::AppExtStates;

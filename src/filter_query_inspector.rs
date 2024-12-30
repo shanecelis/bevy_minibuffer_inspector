@@ -1,11 +1,11 @@
-use crate::{InspectorPlugins, Inspectors, utils::pretty_type_name};
-use bevy_inspector_egui::quick::FilterQueryInspectorPlugin;
+use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
     prelude::{Res, ResMut, Trigger},
     query::QueryFilter,
     schedule::Condition,
 };
+use bevy_inspector_egui::quick::FilterQueryInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
 use bevy_state::prelude::in_state;
 
@@ -76,10 +76,7 @@ impl Default for FilterQueryActs {
     }
 }
 
-fn inspect_filter_query(
-    assets: Res<Inspectors<FilterQueryActs>>,
-    mut minibuffer: Minibuffer,
-) {
+fn inspect_filter_query(assets: Res<Inspectors<FilterQueryActs>>, mut minibuffer: Minibuffer) {
     if !assets.visible.is_empty() {
         minibuffer
             .prompt_map("filter query: ", assets.names.clone())
