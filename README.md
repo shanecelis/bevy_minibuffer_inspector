@@ -1,11 +1,12 @@
 # bevy_minibuffer_inspector
 
-Add commands to inspect the world, assets, resources, and more to
-[bevy_minibuffer](https://github.com/shanecelis/bevy_minibuffer).
+Inspect Bevy's world, assets, resources, and more with
+[bevy_minibuffer](https://github.com/shanecelis/bevy_minibuffer) and
+[bevy-inspector-egui](https://github.com/jakobhellermann/bevy-inspector-egui).
 
-This crate integrates bevy_minibuffer with
-[bevy-inspector-egui](https://github.com/jakobhellermann/bevy-inspector-egui) to
-provide another means of invoking inspectors.
+This crate merely provides a gamedev console approach to invoking
+bevy-inspector-egui's inspectors. The inspectors themselves are wonder that
+bevy-inspector-egui deserves the credit for.
 
 ## Acts
 
@@ -194,9 +195,9 @@ independent of minibuffer's influence.
 
 ## Compatibility
 
-| bevy_minibuffer_inspector | bevy |
-|---------------------------|------|
-| 0.1.0                     | 0.15 |
+| bevy_minibuffer_inspector | bevy_minibuffer | bevy |
+|---------------------------|-----------------|------|
+| 0.1.0                     | 0.3             | 0.15 |
 
 ## License
 
