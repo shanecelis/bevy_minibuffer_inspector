@@ -19,7 +19,7 @@ The Minibuffer acts, i.e., commands, this crate makes available are:
 They may be used _a la carte_.
 
 ### inspect_world
-<img align="right" src=""/>
+<img align="right" src="https://github.com/user-attachments/assets/d6a8f259-5469-4e32-93d9-aefbf54a0e5a"/>
 
 `WorldActs` provides 'inspect_world' act.
 
