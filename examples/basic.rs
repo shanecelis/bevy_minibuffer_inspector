@@ -44,9 +44,8 @@ fn plugin(app: &mut App) {
             BasicActs::default(),
             inspector::WorldActs::default(),
             inspector::ResourceActs::default()
-                // .add::<Configuration>()
-                // .add::<Settings>()
-                ,
+                .add::<Configuration>()
+                .add::<Settings>() ,
             inspector::StateActs::default().add::<AppState>(),
             inspector::AssetActs::default().add::<StandardMaterial>(),
             inspector::FilterQueryActs::default()
@@ -54,8 +53,8 @@ fn plugin(app: &mut App) {
                 .add::<With<Mesh3d>>(),
         ))
         .add_systems(Startup, |mut minibuffer: Minibuffer| {
-            // minibuffer.message("Type ': Tab' to see the other inspectors.");
-            // minibuffer.set_visible(true);
+            minibuffer.message("Type ':inspect Tab' to see the other inspectors.");
+            minibuffer.set_visible(true);
         });
 }
 
@@ -99,7 +98,6 @@ fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
-    mut minibuffer: Minibuffer,
 ) {
     // plane
     commands.spawn((
