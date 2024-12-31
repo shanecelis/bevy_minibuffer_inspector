@@ -86,9 +86,16 @@ fn inspect_state(states: Res<Inspectors<StateActs>>, mut minibuffer: Minibuffer)
             .prompt_map("state: ", states.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
+                 mut minibuffer: Minibuffer,
                  mut states: ResMut<Inspectors<StateActs>>| {
-                    if let Ok(index) = trigger.event_mut().take_result().unwrap() {
-                        states.visible[index] = !states.visible[index];
+                    match trigger.event_mut().take_result().unwrap() {
+                        Ok(index) => {
+                            states.visible[index] = !states.visible[index];
+                            minibuffer.clear();
+                        }
+                        Err(e) => {
+                            minibuffer.message(format!("{e}"));
+                        }
                     }
                 },
             );
@@ -102,8 +109,6 @@ impl Default for StateActs {
         Self {
             plugins: InspectorPlugins::default(),
             acts: Acts::new([Act::new(inspect_state)]),
-            // acts: Acts::new([Act::new(InspectorPlugins::<StateActs>::inspector("state: ", "No states registered"))
-            // .named("inspect_state")])
         }
     }
 }

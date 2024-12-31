@@ -86,9 +86,16 @@ fn inspect_resource(resources: Res<Inspectors<ResourceActs>>, mut minibuffer: Mi
             .prompt_map("resource: ", resources.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
+                mut minibuffer: Minibuffer,
                  mut resources: ResMut<Inspectors<ResourceActs>>| {
-                    if let Ok(index) = trigger.event_mut().take_result().unwrap() {
-                        resources.visible[index] = !resources.visible[index];
+                    match trigger.event_mut().take_result().unwrap() {
+                        Ok(index) => {
+                            resources.visible[index] = !resources.visible[index];
+                            minibuffer.clear();
+                        }
+                        Err(e) => {
+                            minibuffer.message(format!("{e}"));
+                        }
                     }
                 },
             );

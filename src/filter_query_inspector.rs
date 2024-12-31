@@ -11,7 +11,7 @@ use bevy_state::prelude::in_state;
 
 /// ## Adds the 'inspect_filter_query' act
 ///
-/// This act toggles the visibility of the added filter query inspectors.
+/// This act toggles the visibility of the added filter query filters.
 ///
 /// ## Usage
 ///
@@ -76,15 +76,22 @@ impl Default for FilterQueryActs {
     }
 }
 
-fn inspect_filter_query(assets: Res<Inspectors<FilterQueryActs>>, mut minibuffer: Minibuffer) {
-    if !assets.visible.is_empty() {
+fn inspect_filter_query(filters: Res<Inspectors<FilterQueryActs>>, mut minibuffer: Minibuffer) {
+    if !filters.visible.is_empty() {
         minibuffer
-            .prompt_map("filter query: ", assets.names.clone())
+            .prompt_map("filter query: ", filters.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut assets: ResMut<Inspectors<FilterQueryActs>>| {
-                    if let Ok(index) = trigger.event_mut().take_result().unwrap() {
-                        assets.visible[index] = !assets.visible[index];
+                 mut minibuffer: Minibuffer,
+                 mut filters: ResMut<Inspectors<FilterQueryActs>>| {
+                    match trigger.event_mut().take_result().unwrap() {
+                        Ok(index) => {
+                            filters.visible[index] = !filters.visible[index];
+                            minibuffer.clear();
+                        }
+                        Err(e) => {
+                            minibuffer.message(format!("{e}"));
+                        }
                     }
                 },
             );

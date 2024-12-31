@@ -80,9 +80,16 @@ fn inspect_asset(assets: Res<Inspectors<AssetActs>>, mut minibuffer: Minibuffer)
             .prompt_map("asset: ", assets.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                 mut assets: ResMut<Inspectors<AssetActs>>| {
-                    if let Ok(index) = trigger.event_mut().take_result().unwrap() {
-                        assets.visible[index] = !assets.visible[index];
+                 mut assets: ResMut<Inspectors<AssetActs>>,
+                 mut minibuffer: Minibuffer| {
+                    match trigger.event_mut().take_result().unwrap() {
+                        Ok(index) => {
+                            assets.visible[index] = !assets.visible[index];
+                            minibuffer.clear();
+                        }
+                        Err(e) => {
+                            minibuffer.message(format!("{e}"));
+                        }
                     }
                 },
             );

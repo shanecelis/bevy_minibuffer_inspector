@@ -58,12 +58,12 @@ fn inspect_world(
     mut minibuffer: Minibuffer,
 ) {
     use WorldInspectorState::*;
-    let (state, msg) = match state.get() {
-        Invisible => (Visible, "Show world inspector"),
-        Visible => (Invisible, "Hide world inspector"),
+    let state = match state.get() {
+        Invisible => Visible,
+        Visible => Invisible,
     };
     next_state.set(state);
-    minibuffer.message(msg);
+    minibuffer.clear()
 }
 
 impl Default for WorldActs {
