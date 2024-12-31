@@ -1,12 +1,11 @@
 # bevy_minibuffer_inspector
 
-Inspect Bevy's world, assets, resources, and more with
+Inspect bevy worlds, assets, resources, and more with
 [bevy_minibuffer](https://github.com/shanecelis/bevy_minibuffer) and
 [bevy-inspector-egui](https://github.com/jakobhellermann/bevy-inspector-egui).
 
-This crate merely provides a gamedev console approach to invoking
-bevy-inspector-egui's inspectors. The inspectors themselves are wonder that
-bevy-inspector-egui deserves the credit for.
+This crate merely adapts a gamedev console to invoke bevy-inspector-egui's
+inspectors. The inspectors themselves are a wonder of that crate.
 
 ## Acts
 
