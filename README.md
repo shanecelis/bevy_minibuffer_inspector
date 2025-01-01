@@ -44,10 +44,18 @@ binding.
 use bevy::prelude::*;
 use bevy_minibuffer::prelude::*;
 use bevy_minibuffer_inspector as inspector;
-inspector::WorldActs::default()
-    .configure("inspect_world", |mut act| {
-        act.bind(keyseq! { I W });
-    })
+
+fn plugin(app: &mut App) {
+    app
+        .add_plugins(MinibufferPlugins)
+        .add_acts((
+            BasicActs::default(),
+            inspector::WorldActs::default()
+                .configure("inspect_world", |mut act| {
+                    act.bind(keyseq! { I W });
+                }),
+        ));
+}
 ```
 
 ### inspect_resource
