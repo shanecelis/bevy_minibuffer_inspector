@@ -86,7 +86,7 @@ fn inspect_resource(resources: Res<Inspectors<ResourceActs>>, mut minibuffer: Mi
             .prompt_map("resource: ", resources.names.clone())
             .observe(
                 |mut trigger: Trigger<Completed<usize>>,
-                mut minibuffer: Minibuffer,
+                 mut minibuffer: Minibuffer,
                  mut resources: ResMut<Inspectors<ResourceActs>>| {
                     match trigger.event_mut().take_result().unwrap() {
                         Ok(index) => {

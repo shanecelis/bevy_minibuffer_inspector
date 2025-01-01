@@ -24,13 +24,10 @@ bevy_reflect = { version = "0.15.0" }
 bevy_log = { version = "0.15.0" }
 bevy_state = { version = "0.15.0" }
 bevy-inspector-egui = "0.28.0"
-bevy_minibuffer = "0.2.0"
+bevy_minibuffer = "0.3.0"
 trie-rs = "0.4.2"
 disqualified = "1.0.0"
 keyseq = { version = "0.5.0", features = ["bevy"] }
-
-[patch.crates-io]
-bevy_minibuffer = { git = "https://github.com/shanecelis/bevy_minibuffer.git" }
 
 [dev-dependencies]
 bevy = "0.15.0"
