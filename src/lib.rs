@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/bevy_minibuffer_inspector/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/bevy_minibuffer_inspector_egui/0.1.1")]
 #![doc = include_str!("../README.md")]
 #![forbid(missing_docs)]
 

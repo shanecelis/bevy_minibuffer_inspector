@@ -1,0 +1,12 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [unreleased]
+
+## [0.1.1] - 2025-01-02
+- Change crate name to bevy_minibuffer_inspector_egui.
+
+## [0.1.0] - 2025-01-01
+
+- Initial release for bevy 0.15.

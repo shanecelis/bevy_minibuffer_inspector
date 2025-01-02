@@ -980,8 +980,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_minibuffer_inspector"
-version = "0.1.0"
+name = "bevy_minibuffer_inspector_egui"
+version = "0.1.1"
 dependencies = [
  "bevy",
  "bevy-inspector-egui",
