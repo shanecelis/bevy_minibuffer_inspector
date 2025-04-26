@@ -204,6 +204,7 @@ independent of minibuffer's influence.
 
 | bevy_minibuffer_inspector | bevy_minibuffer | bevy |
 |---------------------------|-----------------|------|
+| 0.2.0                     | 0.4             | 0.16 |
 | 0.1.0                     | 0.3             | 0.15 |
 
 ## License
