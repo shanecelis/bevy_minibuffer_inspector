@@ -10,7 +10,7 @@
 //! - state_inspector
 //! - filter_query_inspector
 use bevy::prelude::*;
-use bevy_inspector_egui::prelude::*;
+use bevy_inspector_egui::{bevy_egui::EguiPlugin, prelude::*};
 use bevy_minibuffer::prelude::*;
 use bevy_minibuffer_inspector as inspector;
 
@@ -40,6 +40,9 @@ struct Settings {
 
 fn plugin(app: &mut App) {
     app.add_plugins(MinibufferPlugins)
+        .add_plugins(EguiPlugin {
+            enable_multipass_for_primary_context: true,
+        })
         .add_acts((
             BasicActs::default(),
             inspector::WorldActs::default(),
