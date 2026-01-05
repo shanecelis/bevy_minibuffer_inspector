@@ -1,9 +1,9 @@
 use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
-    prelude::{Res, ResMut, Trigger},
+    prelude::{Res, ResMut, On},
     query::QueryFilter,
-    schedule::Condition,
+    schedule::SystemCondition,
 };
 use bevy_inspector_egui::quick::FilterQueryInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
@@ -81,10 +81,10 @@ fn inspect_filter_query(filters: Res<Inspectors<FilterQueryActs>>, mut minibuffe
         minibuffer
             .prompt_map("filter query: ", filters.names.clone())
             .observe(
-                |mut trigger: Trigger<Completed<usize>>,
+                |mut trigger: On<Completed<usize>>,
                  mut minibuffer: Minibuffer,
                  mut filters: ResMut<Inspectors<FilterQueryActs>>| {
-                    match trigger.event_mut().take_result().unwrap() {
+                    match trigger.event_mut().state.take_result().unwrap() {
                         Ok(index) => {
                             filters.visible[index] = !filters.visible[index];
                             minibuffer.clear();

@@ -2,8 +2,8 @@ use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_asset::Asset;
 use bevy_ecs::{
-    prelude::{Res, ResMut, Trigger},
-    schedule::Condition,
+    prelude::{Res, ResMut, On},
+    schedule::SystemCondition,
 };
 use bevy_inspector_egui::quick::AssetInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
@@ -79,10 +79,10 @@ fn inspect_asset(assets: Res<Inspectors<AssetActs>>, mut minibuffer: Minibuffer)
         minibuffer
             .prompt_map("asset: ", assets.names.clone())
             .observe(
-                |mut trigger: Trigger<Completed<usize>>,
+                |mut trigger: On<Completed<usize>>,
                  mut assets: ResMut<Inspectors<AssetActs>>,
                  mut minibuffer: Minibuffer| {
-                    match trigger.event_mut().take_result().unwrap() {
+                    match trigger.event_mut().state.take_result().unwrap() {
                         Ok(index) => {
                             assets.visible[index] = !assets.visible[index];
                             minibuffer.clear();

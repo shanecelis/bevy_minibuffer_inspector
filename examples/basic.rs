@@ -40,9 +40,7 @@ struct Settings {
 
 fn plugin(app: &mut App) {
     app.add_plugins(MinibufferPlugins)
-        .add_plugins(EguiPlugin {
-            enable_multipass_for_primary_context: true,
-        })
+        .add_plugins(EguiPlugin::default())
         .add_acts((
             BasicActs::default(),
             inspector::WorldActs::default(),
@@ -67,7 +65,7 @@ fn main() {
             DefaultPlugins.set(WindowPlugin {
                 primary_window: Some(Window {
                     title: "basic".into(),
-                    resolution: [400.0, 400.0].into(),
+                    resolution: (400, 400).into(),
                     ..Default::default()
                 }),
                 ..default()

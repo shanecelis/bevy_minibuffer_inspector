@@ -1,8 +1,8 @@
 use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
-    prelude::{Res, ResMut, Trigger},
-    schedule::Condition,
+    prelude::{Res, ResMut, On},
+    schedule::SystemCondition,
 };
 use bevy_inspector_egui::quick::StateInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
@@ -85,10 +85,10 @@ fn inspect_state(states: Res<Inspectors<StateActs>>, mut minibuffer: Minibuffer)
         minibuffer
             .prompt_map("state: ", states.names.clone())
             .observe(
-                |mut trigger: Trigger<Completed<usize>>,
+                |mut trigger: On<Completed<usize>>,
                  mut minibuffer: Minibuffer,
                  mut states: ResMut<Inspectors<StateActs>>| {
-                    match trigger.event_mut().take_result().unwrap() {
+                    match trigger.event_mut().state.take_result().unwrap() {
                         Ok(index) => {
                             states.visible[index] = !states.visible[index];
                             minibuffer.clear();

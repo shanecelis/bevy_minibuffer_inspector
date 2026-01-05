@@ -1,5 +1,5 @@
 use bevy_app::{App, Plugin, PluginGroup, PluginGroupBuilder};
-use bevy_ecs::prelude::{Res, ResMut, Resource, Trigger};
+use bevy_ecs::prelude::{Res, ResMut, Resource, On};
 use bevy_log::warn;
 use bevy_minibuffer::prelude::*;
 use std::borrow::Cow;
@@ -61,9 +61,9 @@ impl<M: Send + Sync + 'static> InspectorPlugins<M> {
                 minibuffer
                     .prompt_map(prompt.clone(), inspectors.names.clone())
                     .observe(
-                        |mut trigger: Trigger<Completed<usize>>,
+                        |mut trigger: On<Completed<usize>>,
                          mut inspectors: ResMut<Inspectors<M>>| {
-                            if let Ok(index) = trigger.event_mut().take_result().unwrap() {
+                            if let Ok(index) = trigger.event_mut().state.take_result().unwrap() {
                                 inspectors.visible[index] = !inspectors.visible[index];
                             }
                         },

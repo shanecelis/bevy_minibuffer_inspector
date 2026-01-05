@@ -9,12 +9,12 @@ inspectors. The inspectors themselves are a wonder of that crate.
 
 ## Acts
 
-The Minibuffer acts, i.e., commands, this crate makes available are:
-- inspect_world
-- inspect_resource
-- inspect_asset
-- inspect_state
-- inspect_filter_query
+This crate exposes the following Minibuffer acts, i.e., commands:
+- inspect_world,
+- inspect_resource,
+- inspect_asset,
+- inspect_state,
+- and inspect_filter_query.
 
 They may be used _a la carte_.
 
@@ -204,6 +204,7 @@ independent of minibuffer's influence.
 
 | bevy_minibuffer_inspector | bevy_minibuffer | bevy |
 |---------------------------|-----------------|------|
+| 0.3.0                     | 0.5             | 0.17 |
 | 0.2.0                     | 0.4             | 0.16 |
 | 0.1.0                     | 0.3             | 0.15 |
 
@@ -213,7 +214,7 @@ This crate is licensed under the MIT License or the Apache License 2.0.
 
 ## Acknowledgments
 
-Many thanks to [Jakob Hellermann](https://github.com/jakobhellermann) for
+Thanks to [Jakob Hellermann](https://github.com/jakobhellermann) for
 [bevy-inspector-egui](https://github.com/jakobhellermann/bevy-inspector-egui)
-which I am constantly reaching for to dig into my Bevy projects with. It is for
-that reason it is the first integration I made for bevy_minibuffer.
+which I often reach for to dig into my own Bevy projects. That is the reason
+this is the first integration I made for bevy_minibuffer.

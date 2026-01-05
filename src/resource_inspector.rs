@@ -1,8 +1,8 @@
 use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
-    prelude::{Res, ResMut, Resource, Trigger},
-    schedule::Condition,
+    prelude::{Res, ResMut, Resource, On},
+    schedule::SystemCondition,
 };
 use bevy_inspector_egui::quick::ResourceInspectorPlugin;
 use bevy_minibuffer::{prelude::*, prompt::PromptState};
@@ -85,10 +85,10 @@ fn inspect_resource(resources: Res<Inspectors<ResourceActs>>, mut minibuffer: Mi
         minibuffer
             .prompt_map("resource: ", resources.names.clone())
             .observe(
-                |mut trigger: Trigger<Completed<usize>>,
+                |mut trigger: On<Completed<usize>>,
                  mut minibuffer: Minibuffer,
                  mut resources: ResMut<Inspectors<ResourceActs>>| {
-                    match trigger.event_mut().take_result().unwrap() {
+                    match trigger.event_mut().state.take_result().unwrap() {
                         Ok(index) => {
                             resources.visible[index] = !resources.visible[index];
                             minibuffer.clear();
