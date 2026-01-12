@@ -34,7 +34,7 @@ bevy = "0.17.0"
 version-sync = "0.9.5"
 
 [patch.crates-io]
-bevy_minibuffer = { path = "../bevy_minibuffer" }
-bevy_asky = { path = "../bevy_asky" }
-bevy-input-sequence = { path = "../bevy-input-sequence" }
-keyseq = { path = "../keyseq" }
+# bevy_minibuffer = { path = "../bevy_minibuffer" }
+# bevy_asky = { path = "../bevy_asky" }
+# bevy-input-sequence = { path = "../bevy-input-sequence" }
+# keyseq = { path = "../keyseq" }
