@@ -1,5 +1,5 @@
 use bevy_app::{App, Plugin, PluginGroup, PluginGroupBuilder};
-use bevy_ecs::prelude::{Res, ResMut, Resource, On};
+use bevy_ecs::prelude::{On, Res, ResMut, Resource};
 use bevy_log::warn;
 use bevy_minibuffer::prelude::*;
 use std::borrow::Cow;

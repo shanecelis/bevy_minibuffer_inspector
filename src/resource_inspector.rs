@@ -1,7 +1,7 @@
 use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
-    prelude::{Res, ResMut, Resource, On},
+    prelude::{On, Res, ResMut, Resource},
     schedule::SystemCondition,
 };
 use bevy_inspector_egui::quick::ResourceInspectorPlugin;
