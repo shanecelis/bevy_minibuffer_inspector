@@ -74,7 +74,7 @@ impl StateActs {
     ) {
         inspector_plugins.add_plugin(
             StateInspectorPlugin::<A>::default().run_if(
-                in_state(PromptState::Visible).and(InspectorPlugins::<Self>::visible(index)),
+                in_state(PromptState::Visible).and_then(InspectorPlugins::<Self>::visible(index)),
             ),
         );
     }

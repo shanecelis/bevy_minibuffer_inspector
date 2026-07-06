@@ -1,6 +1,7 @@
 use crate::{utils::pretty_type_name, InspectorPlugins, Inspectors};
 use bevy_app::{PluginGroup, PluginGroupBuilder};
 use bevy_ecs::{
+    component::Mutable,
     prelude::{On, Res, ResMut, Resource},
     schedule::SystemCondition,
 };
@@ -51,7 +52,7 @@ impl ActsPluginGroup for ResourceActs {
 
 impl ResourceActs {
     /// Add a resource to the list of resources when prompted.
-    pub fn add<R: Resource + Reflect>(mut self) -> Self {
+    pub fn add<R: Resource<Mutability = Mutable> + Reflect>(mut self) -> Self {
         self.plugins.add_inspector(
             pretty_type_name::<R>(),
             Self::resource_inspector_plugin::<R>,
@@ -59,13 +60,13 @@ impl ResourceActs {
         self
     }
 
-    fn resource_inspector_plugin<R: Resource + Reflect>(
+    fn resource_inspector_plugin<R: Resource<Mutability = Mutable> + Reflect>(
         index: usize,
         inspector_plugins: &mut InspectorPlugins<Self>,
     ) {
         inspector_plugins.add_plugin(
             ResourceInspectorPlugin::<R>::default().run_if(
-                in_state(PromptState::Visible).and(InspectorPlugins::<Self>::visible(index)),
+                in_state(PromptState::Visible).and_then(InspectorPlugins::<Self>::visible(index)),
             ),
         );
     }

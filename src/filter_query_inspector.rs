@@ -61,7 +61,7 @@ impl FilterQueryActs {
     ) {
         inspector_plugins.add_plugin(
             FilterQueryInspectorPlugin::<A>::default().run_if(
-                in_state(PromptState::Visible).and(InspectorPlugins::<Self>::visible(index)),
+                in_state(PromptState::Visible).and_then(InspectorPlugins::<Self>::visible(index)),
             ),
         );
     }
