@@ -382,7 +382,9 @@ dependencies = [
 
 [[package]]
 name = "bevy-input-sequence"
-version = "0.10.0"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0ce4c58797c3adf2a1f115dfc762981ce2cb967d5980fb9389587a8bd6ebd43"
 dependencies = [
  "bevy",
  "keyseq",
@@ -552,7 +554,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_asky"
-version = "0.5.0"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8fdf0aee04da4f90f4f5fccb3d84690091d39daa14f17eae7d31c3f84fa448da"
 dependencies = [
  "accesskit",
  "bevy",
@@ -1302,6 +1306,8 @@ checksum = "bff34eb29ff4b8a8688bc7299f14fb6b597461ca80fec03ed7d22939ab33e48f"
 [[package]]
 name = "bevy_minibuffer"
 version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9777ab8c6467cb8487f366aa70ab75a118ae41405e95cf80a4b6f15f0ff7d501"
 dependencies = [
  "accesskit",
  "bevy",
@@ -3618,6 +3624,8 @@ dependencies = [
 [[package]]
 name = "keyseq"
 version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eae5094308e051c9554a8ebf870a6ad3ecfbe4364afdf88722ec63e0af9109f2"
 dependencies = [
  "bevy",
  "bevy_reflect",
@@ -3628,6 +3636,8 @@ dependencies = [
 [[package]]
 name = "keyseq_macros"
 version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d8fe20ab8d5b7cdd8b87e27d1f598ebd3f68d6fb8b123a3bae46718001c42dca"
 dependencies = [
  "proc-macro-error",
  "proc-macro2",
