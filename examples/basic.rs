@@ -10,7 +10,7 @@
 //! - state_inspector
 //! - filter_query_inspector
 use bevy::prelude::*;
-use bevy_inspector_egui::{bevy_egui::EguiPlugin, prelude::*};
+use bevy_inspector_egui::bevy_egui::EguiPlugin;
 use bevy_minibuffer::prelude::*;
 use bevy_minibuffer_inspector as inspector;
 
@@ -22,19 +22,17 @@ enum AppState {
     C,
 }
 
-#[derive(Reflect, Resource, Default, InspectorOptions)]
-#[reflect(Resource, InspectorOptions)]
+#[derive(Reflect, Resource, Default)]
+#[reflect(Resource)]
 struct Configuration {
     name: String,
-    #[inspector(min = 0.0, max = 1.0)]
     option: f32,
 }
 
-#[derive(Reflect, Resource, Default, InspectorOptions)]
-#[reflect(Resource, InspectorOptions)]
+#[derive(Reflect, Resource, Default)]
+#[reflect(Resource)]
 struct Settings {
     name: String,
-    #[inspector(min = 0.0, max = 1.0)]
     option: f32,
 }
 
