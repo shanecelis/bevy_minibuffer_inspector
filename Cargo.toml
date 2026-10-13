@@ -17,15 +17,15 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/shanecelis/bevy_minibuffer_inspector"
 
 [dependencies]
-bevy_app = { version = "0.20.0-rc.1" }
-bevy_asset = { version = "0.20.0-rc.1" }
-bevy_camera = { version = "0.20.0-rc.1" }
-bevy_ecs = { version = "0.20.0-rc.1" }
-bevy_reflect = { version = "0.20.0-rc.1" }
-bevy_transform = { version = "0.20.0-rc.1" }
-bevy_log = { version = "0.20.0-rc.1" }
-bevy_state = { version = "0.20.0-rc.1" }
-bevy_window = { version = "0.20.0-rc.1" }
+bevy_app = { version = "0.20.0" }
+bevy_asset = { version = "0.20.0" }
+bevy_camera = { version = "0.20.0" }
+bevy_ecs = { version = "0.20.0" }
+bevy_reflect = { version = "0.20.0" }
+bevy_transform = { version = "0.20.0" }
+bevy_log = { version = "0.20.0" }
+bevy_state = { version = "0.20.0" }
+bevy_window = { version = "0.20.0" }
 bevy-inspector-egui = "0.37"
 bevy_minibuffer = "0.8.0"
 trie-rs = "0.4.2"
@@ -34,7 +34,7 @@ egui = "0.36"
 keyseq = { version = "0.10.0", features = ["bevy"] }
 
 [dev-dependencies]
-bevy = "0.20.0-rc.1"
+bevy = "0.20.0"
 version-sync = "0.9.5"
 
 [patch.crates-io]
@@ -42,5 +42,4 @@ bevy_minibuffer = { path = "../bevy_minibuffer" }
 bevy_asky = { path = "../bevy_asky" }
 bevy-input-sequence = { path = "../bevy-input-sequence" }
 keyseq = { path = "../keyseq" }
-bevy_egui = { git = "https://github.com/taboky-dev/bevy_egui.git", rev = "3cd933b" }
-bevy-inspector-egui = { git = "https://github.com/taboky-dev/bevy-inspector-egui.git", rev = "bd1788b" }
+bevy-inspector-egui = { path = "../bevy-inspector-egui/crates/bevy-inspector-egui" }
