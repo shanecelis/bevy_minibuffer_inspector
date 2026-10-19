@@ -26,7 +26,7 @@ bevy_transform = { version = "0.20.0" }
 bevy_log = { version = "0.20.0" }
 bevy_state = { version = "0.20.0" }
 bevy_window = { version = "0.20.0" }
-bevy-inspector-egui = "0.37"
+bevy-inspector-egui = "0.38"
 bevy_minibuffer = "0.8.0"
 trie-rs = "0.4.2"
 disqualified = "1.0.0"
@@ -38,8 +38,8 @@ bevy = "0.20.0"
 version-sync = "0.9.5"
 
 [patch.crates-io]
-bevy_minibuffer = { path = "../bevy_minibuffer" }
-bevy_asky = { path = "../bevy_asky" }
-bevy-input-sequence = { path = "../bevy-input-sequence" }
-keyseq = { path = "../keyseq" }
-bevy-inspector-egui = { path = "../bevy-inspector-egui/crates/bevy-inspector-egui" }
+# bevy_minibuffer = { path = "../bevy_minibuffer" }
+# bevy_asky = { path = "../bevy_asky" }
+# bevy-input-sequence = { path = "../bevy-input-sequence" }
+# keyseq = { path = "../keyseq" }
+# bevy-inspector-egui = { path = "../bevy-inspector-egui/crates/bevy-inspector-egui" }
