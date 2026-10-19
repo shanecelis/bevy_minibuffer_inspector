@@ -76,10 +76,9 @@ impl Default for WorldActs {
 
 impl Plugin for WorldActs {
     fn build(&self, app: &mut App) {
-        app.add_plugins(
-            WorldInspectorPlugin::default()
-                .run_if(in_state(PromptState::Visible).and_then(in_state(WorldInspectorState::Visible))),
-        )
+        app.add_plugins(WorldInspectorPlugin::default().run_if(
+            in_state(PromptState::Visible).and_then(in_state(WorldInspectorState::Visible)),
+        ))
         .init_state::<WorldInspectorState>();
         self.warn_on_unused_acts();
     }

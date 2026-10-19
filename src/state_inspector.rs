@@ -72,11 +72,9 @@ impl StateActs {
         index: usize,
         inspector_plugins: &mut InspectorPlugins<Self>,
     ) {
-        inspector_plugins.add_plugin(
-            StateInspectorPlugin::<A>::default().run_if(
-                in_state(PromptState::Visible).and_then(InspectorPlugins::<Self>::visible(index)),
-            ),
-        );
+        inspector_plugins.add_plugin(StateInspectorPlugin::<A>::default().run_if(
+            in_state(PromptState::Visible).and_then(InspectorPlugins::<Self>::visible(index)),
+        ));
     }
 }
 
